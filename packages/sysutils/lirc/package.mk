@@ -12,8 +12,6 @@ PKG_DEPENDS_TARGET="toolchain libftdi1 libusb-compat libxslt alsa-lib"
 PKG_LONGDESC="LIRC is a package that allows you to decode and send infra-red signals."
 PKG_TOOLCHAIN="autotools"
 
-PKG_PYTHON_WANTED=Python2
-
 PKG_CONFIGURE_OPTS_TARGET="--enable-devinput \
                            --enable-uinput \
                            --with-gnu-ld \

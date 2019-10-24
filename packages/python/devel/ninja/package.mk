@@ -8,14 +8,11 @@ PKG_SHA256="a6b6f7ac360d4aabd54e299cc1d8fa7b234cd81b9401693da21221c62569a23e"
 PKG_LICENSE="Apache"
 PKG_SITE="http://martine.github.io/ninja/"
 PKG_URL="https://github.com/ninja-build/ninja/archive/v$PKG_VERSION.tar.gz"
-PKG_DEPENDS_HOST="Python2:host"
+PKG_DEPENDS_HOST="Python3:host"
 PKG_LONGDESC="Small build system with a focus on speed"
-PKG_TOOLCHAIN="manual"
-
-make_host() {
-  python2 configure.py --bootstrap
-}
+PKG_TOOLCHAIN="cmake-make"
 
 makeinstall_host() {
+  mkdir -p $TOOLCHAIN/bin
   cp ninja $TOOLCHAIN/bin/
 }
