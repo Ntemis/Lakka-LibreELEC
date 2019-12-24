@@ -53,7 +53,7 @@
 
   # Kernel to use. values can be:
   # default odroidxu3-4.14
-    LINUX="default"
+    LINUX="odroidxu3-4.14"
 
 
 ################################################################################
@@ -101,7 +101,7 @@
     MALI_FAMILY="t620"
   
   # build and install CEC framework support (yes / no)
-    CEC_FRAMEWORK_SUPPORT="yes"
+    CEC_FRAMEWORK_SUPPORT=""
 
   # Modules to install in initramfs for early boot
     INITRAMFS_MODULES=""
@@ -115,6 +115,3 @@
 
   # Default system partition offset, in sectors, eg. 2048
     SYSTEM_PART_START=3072
-
-  # As this isn't an upstream project, let's fetch Kodi addons from a similar supported project
-    ADDON_URL="https://addons.libreelec.tv/$ADDON_VERSION/H3/arm"
