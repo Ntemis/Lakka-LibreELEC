@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="play"
-PKG_VERSION="fedc1e1"
+PKG_VERSION="4d92a8f"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/Play-"
