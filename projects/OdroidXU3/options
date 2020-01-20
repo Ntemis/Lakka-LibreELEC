@@ -118,3 +118,5 @@
 
   # disable some cores
     LIBRETRO_CORES="${LIBRETRO_CORES// play /}"
+    LIBRETRO_CORES="${LIBRETRO_CORES// ppsspp /}"
+
