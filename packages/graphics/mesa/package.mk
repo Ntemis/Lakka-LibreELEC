@@ -8,16 +8,10 @@ PKG_SHA256="97c9f6a6127bee5ab21c3fe63ff3e0bd73a7966415f92f66500b0b276b7150da"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.mesa3d.org/"
 PKG_URL="https://github.com/mesa3d/mesa/archive/mesa-$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain Mako:host expat libdrm"
+PKG_DEPENDS_TARGET="toolchain expat libdrm Mako:host"
 PKG_LONGDESC="Mesa is a 3-D graphics library with an API."
 PKG_TOOLCHAIN="meson"
 PKG_BUILD_FLAGS="+lto"
-
-if listcontains "${GRAPHIC_DRIVERS}" "(lima|panfrost)"; then
-  PKG_VERSION="659aa3dd6519f64379e91ca97fe184434fd7fdee" # master-19.2
-  PKG_SHA256="7152dd8c780e47c4e5e18ebaa47fd4f8fe116b43012affda2f964ae23b324d34"
-  PKG_URL="https://gitlab.freedesktop.org/mesa/mesa/-/archive/$PKG_VERSION/mesa-$PKG_VERSION.tar.gz"
-fi
 
 get_graphicdrivers
 
@@ -28,7 +22,7 @@ PKG_MESON_OPTS_TARGET="-Ddri-drivers=${DRI_DRIVERS// /,} \
                        -Dgallium-omx=disabled \
                        -Dgallium-nine=false \
                        -Dgallium-opencl=disabled \
-                       -Dvulkan-drivers=auto \
+                       -Dvulkan-drivers= \
                        -Dshader-cache=true \
                        -Dshared-glapi=true \
                        -Dopengl=true \
@@ -43,14 +37,6 @@ PKG_MESON_OPTS_TARGET="-Ddri-drivers=${DRI_DRIVERS// /,} \
                        -Dselinux=false \
                        -Dosmesa=none"
 
-if [ "$DISTRO" = "Lakka" ]; then
-  VAAPI_SUPPORT=no
-fi
-
-if [ "$TARGET_ARCH" = "i386" ]; then
-  PKG_MESON_OPTS_TARGET="${PKG_MESON_OPTS_TARGET//-Dvulkan-drivers=auto/-Dvulkan-drivers=}"
-fi
-
 if [ "$DISPLAYSERVER" = "x11" ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr"
   export X11_INCLUDES=
@@ -58,10 +44,6 @@ if [ "$DISPLAYSERVER" = "x11" ]; then
 elif [ "$DISPLAYSERVER" = "weston" ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET wayland wayland-protocols"
   PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland,drm -Ddri3=false -Dglx=disabled"
-elif [ "$DISTRO" = "Lakka" ]; then
-  PKG_DEPENDS_TARGET+=" glproto dri2proto dri3proto presentproto xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence xrandr systemd openssl"
-  export X11_INCLUDES=
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=x11,drm -Ddri3=true -Dglx=dri"
 else
   PKG_MESON_OPTS_TARGET+=" -Dplatforms=drm -Ddri3=false -Dglx=disabled"
 fi
@@ -107,21 +89,6 @@ fi
 pre_configure_target() {
   if [ "$DISPLAYSERVER" = "x11" ]; then
     export LIBS="-lxcb-dri3 -lxcb-dri2 -lxcb-xfixes -lxcb-present -lxcb-sync -lxshmfence -lz"
-  fi
-
-  # Temporary hack (until panfrost evolves) to use 64-bit pointers in structs passed to GPU
-  # even if userspace is 32-bit. This is required for Mali-T8xx to work with mesa built for
-  # arm userspace. The hack does not affect building for aarch64.
-  if [[ "${MALI_FAMILY}" = *t8* ]]; then
-    (
-      cd "$PKG_BUILD/src/gallium/drivers/panfrost"
-      sed -i 's/uintptr_t/uint64_t/g' include/panfrost-job.h \
-                                      include/panfrost-misc.h \
-                                      pan_context.c \
-                                      pandecode/decode.c
-
-      find -type f -exec sed -i 's/ndef __LP64__/ 0/g; s/def __LP64__/ 1/g' {} +;
-    )
   fi
 }
 
