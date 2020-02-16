@@ -28,6 +28,10 @@ case "$LINUX" in
     PKG_URL="https://github.com/raspberrypi/linux/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
+  odroidxu3-5.4)
+    PKG_VERSION="12f18495dc94dccd8b853ae54c3e3ab054843ebb"
+    PKG_URL="https://github.com/mihailescu2m/linux/archive/$PKG_VERSION.tar.gz"
+    ;;
   *)
     PKG_VERSION="5.1.18"
     PKG_SHA256="6013e7dcf59d7c1b168d8edce3dbd61ce340ff289541f920dbd0958bef98f36a"

@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index e955242..5de32fb 100644
+--- a/Makefile
++++ b/Makefile
+@@ -185,7 +185,7 @@ endif
+ #
+ LIBFDT_dir = libfdt
+ LIBFDT_archive = $(LIBFDT_dir)/libfdt.a
+-LIBFDT_lib = $(LIBFDT_dir)/$(LIBFDT_LIB)
++LIBFDT_lib = $(LIBFDT_dir)/libfdt.$(SHAREDLIB_EXT)
+ LIBFDT_include = $(addprefix $(LIBFDT_dir)/,$(LIBFDT_INCLUDES))
+ LIBFDT_version = $(addprefix $(LIBFDT_dir)/,$(LIBFDT_VERSION))
+
