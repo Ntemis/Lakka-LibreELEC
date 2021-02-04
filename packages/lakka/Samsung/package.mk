@@ -18,7 +18,7 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="OdroidXU3"
+PKG_NAME="Samsung"
 PKG_VERSION=""
 PKG_REV="1"
 PKG_ARCH="any"
@@ -28,7 +28,7 @@ PKG_URL=""
 PKG_DEPENDS_TARGET="retroarch"
 PKG_PRIORITY="optional"
 PKG_SECTION="virtual"
-PKG_SHORTDESC="Lakka metapackage for OdroidXU3"
+PKG_SHORTDESC="Lakka metapackage for OdroidXU4"
 PKG_LONGDESC=""
 
 PKG_IS_ADDON="no"

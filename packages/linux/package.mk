@@ -34,8 +34,8 @@ case "$LINUX" in
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     PKG_PATCH_DIRS="rpi"
     ;;
-  odroidxu3-5.4)
-    PKG_VERSION="5e12d570f207e48f321029b15026ae7c4ab21217"
+  odroidxu4-5.4)
+    PKG_VERSION="5477551868b38959872536e9600ab3d2491b869a"
     PKG_URL="https://github.com/hardkernel/linux/archive/$PKG_VERSION.tar.gz"
     ;;
   mainline-5.10)

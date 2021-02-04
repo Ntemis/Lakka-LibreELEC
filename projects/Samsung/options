@@ -18,7 +18,7 @@
     KERNEL_MAKE_EXTRACMD="dtbs"
 
   # Kernel to use:
-    LINUX="samsung"
+    LINUX="odroidxu4-5.4"
 
   # kernel serial console
     EXTRA_CMDLINE="quiet systemd.debug_shell=ttySAC2 console=ttySAC2,115200n8 console=tty0"
